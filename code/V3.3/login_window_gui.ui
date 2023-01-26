@@ -154,12 +154,14 @@
    border-style:solid;
     border-width:0pz 0px 5px 0px;
     border-color:rgb(0, 205, 205);
+	background:white;
 }
 QPushButton:pressed
 {
    border-style:solid;
     border-width:0px 0px 2px 0px;
     border-color:rgb(0, 205, 205);
+	background:white;
 }
     
 </string>
@@ -184,12 +186,14 @@ QPushButton:pressed
    border-style:solid;
     border-width:0pz 0px 5px 0px;
     border-color:rgb(0, 205, 205);
+	background:white;
 }
 QPushButton:pressed
 {
    border-style:solid;
     border-width:0px 0px 2px 0px;
     border-color:rgb(0, 205, 205);
+	background:white;
 }
     
 </string>

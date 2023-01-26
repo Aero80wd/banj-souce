@@ -1,5 +1,5 @@
 import sys
-
+import platform
 from openpyxl.styles import Alignment
 
 import GUI
@@ -46,7 +46,7 @@ def sheet_model(sheet, files_name=False):
             file.save('./Data/' + x)
         return
     if files_name:
-        file = load_workbook('.\\Data\\' + files_name + '.xlsx')
+        file = load_workbook('./Data/' + files_name + '.xlsx')
         hh = file[str(sheet)]
         hh.merge_cells('A1:C1')
         hh['A1'] = '双十中学' + sheet
@@ -54,7 +54,7 @@ def sheet_model(sheet, files_name=False):
         hh['B2'] = '成绩'
         hh['C2'] = '等级'
         hh['A1'].alignment = Alignment(horizontal='center', vertical='center')
-        file.save('.\\Data\\' + files_name + '.xlsx')
+        file.save('./Data/' + files_name + '.xlsx')
         return True
 
 
@@ -165,7 +165,10 @@ t1.start()
 
 
 def open_data_files_name():
-    os.system('start .\\Data')
+    if platform.system() == 'Linux':
+        os.popen('nautilus ./Data')
+        return
+    os.system('start ./Data')
 
 
 def new_file():
@@ -175,21 +178,21 @@ def new_file():
 
     name = ui.new_file_entry.text()
     temp = Workbook()
-    temp.save('.\\Data\\' + str(name) + '.xlsx')
+    temp.save('./Data/' + str(name) + '.xlsx')
     sheet_model('Sheet', ui.new_file_entry.text())
     ui.new_file_entry.clear()
     messagebox.showinfo('提示', '创建成功')
 
 
 def caidan_2():
-    r = range(random.randint(100, 10000))
+    r = range(random.randint(10, 20))
     print(list(r)[-1])
     for x in r:
         messagebox.showinfo('CD' + str(x), 'abcdefghijklmnopqrstuvwxyz'[random.randint(0, 25)])
 
 
 def dali_cai():
-    rtext = ['bilibili', 'banj-souce', 'build', 'video', 'python', 'python-qt', 'pycharm', 'windows']
+    rtext = ['bilibili', 'banj-souce', 'build', 'video', 'python', 'python-qt', 'pycharm', 'windows','Linux']
     print(ui.dial.value())
     if (ui.dial.value() >= 90) and (ui.dial.value() < 99):
         ui.labelC.setText(random.choice(rtext))
@@ -210,10 +213,10 @@ def open_file(text=False, bool=True):
         else:
             entry = text.split(';')
         if bool == True:
-            file = load_workbook('.\\Data\\' + str(entry[0]) + '.xlsx')
-            ui.open_text.setText('.\\Data\\' + str(entry[0]) + '.xlsx;' + entry[1])
+            file = load_workbook('./Data/' + str(entry[0]) + '.xlsx')
+            ui.open_text.setText('./Data/' + str(entry[0]) + '.xlsx;' + entry[1])
         if bool == False:
-            file = load_workbook('.\\Data\\' + str(entry[0]))
+            file = load_workbook('./Data/' + str(entry[0]))
 
         ws = file[str(entry[1])]
         if bool == True:
